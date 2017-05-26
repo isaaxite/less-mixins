@@ -76,36 +76,70 @@
 	.transform(scale(@x,@y));
 }
 
-.triangle(@direction:top, @weight:6px, @color:#666){
-	display: inline-block;
-	width: 0;
-	height: 0;
-	font-size: 0;
-	overflow: hidden;
-	content: '';
-	& when (@direction = top) {
-		border-top:0;
-		border-bottom:@weight solid @color;
-		border-left:@weight dashed transparent;
-		border-right:@weight dashed transparent;
-	} 
-	& when (@direction = right) {
-		border-right:0;
-		border-left:@weight solid @color;
-		border-top:@weight dashed transparent;
-		border-bottom:@weight dashed transparent;
-	} 
-	& when (@direction = bottom) {
-		border-bottom:0;
-		border-top:@weight solid @color;
-		border-left:@weight dashed transparent;
-		border-right:@weight dashed transparent;
-	} 
-	& when (@direction = left) {
-		border-left:0;
-		border-right:@weight solid @color;
-		border-top:@weight dashed transparent;
-		border-bottom:@weight dashed transparent;
+.triangle(@direction: top, @weight: 6px, @color: #666, @border: none, @borderColor: #333){
+	
+	.temp(){ content: '';width: 0;height: 0;font-size: 0; }
+	
+	.tempDirection(@weight, @color, @zIndex: 1){
+		border:@weight dashed transparent;
+		border-@{direction}: none;
+		z-index: @zIndex;
+		& when (@direction = top) {
+			border-bottom:@weight solid @color;
+		}
+		& when (@direction = right) {
+			border-left:@weight solid @color;
+		}
+		& when (@direction = bottom) {
+			border-top:@weight solid @color;
+		}
+		& when (@direction = left) {
+			border-right:@weight solid @color;
+		}
+	}
+
+	&{ display: inline-block;position: relative; }
+	& when (@direction = top),(@direction = bottom) {
+		width: @weight * 2;height: @weight;
+	}
+	& when (@direction = left),(@direction = right) {
+		width: @weight;height: @weight * 2;
+	}
+
+	& when not (@border = none) {
+		.parentSizeBorder(@direct){ 
+			& when (@direct = horizontal) { width: (@weight + @border) * 2;height: @weight + @border; }
+			& when (@direct = vertical) { width: @weight + @border;height: (@weight + @border) * 2; }
+		}
+		& when (@direction = top) {
+			.parentSizeBorder(horizontal);
+			&::after{ .absolute(@bottom: 0, @left: 0); }
+			&::before{ .absolute(@bottom: 0, @left: @border); }
+		}
+		& when (@direction = right) {
+			.parentSizeBorder(vertical);
+			&::after{ .absolute(@bottom: 0, @left: 0); }
+			&::before{ .absolute(@bottom: @border, @left: 0); }
+		}
+		& when (@direction = bottom) {
+			.parentSizeBorder(horizontal);
+			&::after{ .absolute(@bottom: 0, @left: 0); }
+			&::before{ .absolute(@bottom: @border, @left: @border); }
+		}
+		& when (@direction = left) {
+			.parentSizeBorder(vertical);
+			&::after{ .absolute(@bottom: 0, @left: 0); }
+			&::before{ .absolute(@bottom: @border, @left: @border); }
+		}
+	}
+
+	&::before{
+		position: absolute;.temp();.tempDirection(@weight, @color, 2);
+	}
+	& when not (@border = none) {
+		&::after{
+			.temp();.tempDirection(@border + @weight, @borderColor, 1);
+		}
 	}
 }
 

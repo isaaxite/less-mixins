@@ -1,7 +1,7 @@
 .gb-selector{
 	display: inline-block;position: relative;
 	.input{ position: relative;z-index: 2;cursor: pointer;position: relative; }
-	.input::after{
+	.input>i{
 		.triangle(bottom);.absolute(@top: 50%,@right: 10px);
 	}
 	input{ outline: none;padding-left: 5px;cursor: pointer;width: 100%;padding-right: 26px;.gb-ellipsis(); }
