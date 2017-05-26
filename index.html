@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
   <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
   <link rel="stylesheet" type="text/css" href="tool.css">
+  <script type="text/javascript" src="zepto.min.js"></script>
 </head>
 <style type="text/css">
 	body{
@@ -17,15 +18,35 @@
 	<a class="gb-btn danger block" href="">submit</a><br><br>
 	<button class="gb-btn primary block">submit</button>
 	<br><br>
-	<div class="gb-selector">
-		<dl class="input"><input type="" name=""></dl>
+	<div id="select-1" class="dropmenu gb-selector">
+		<dl class="input"><input type="" disabled name=""></dl>
 		<ul class="options">
 			<li>1</li>
 			<li>2</li>
 			<li>3</li>
 			<li>4</li>
+			<li>4</li>
+			<li>4</li>
+			<li>4</li>
+			<li>4</li>
 		</ul>
 	</div><br>
 	sdsd
+<script type="text/javascript">
+	$(document)
+	.on('click', '#select-1', function(e){
+		e.stopPropagation();
+	})
+	.on('click', 'body', function(){
+		$dropmenu = $('#select-1');
+		$dropmenu.find('.options').removeClass('active');
+	})
+	.on('click', '#select-1 .input', function(){
+		$dropmenu = $('#select-1');
+		$dropmenu.find('.options').addClass('active');
+		
+	});
+
+</script>
 </body>
 </html>

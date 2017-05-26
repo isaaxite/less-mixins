@@ -1,24 +1,24 @@
 .dropmenu(@inputHeight: 32px, @activeOptionsHeight: 100px){
-	.gb-selector{
+	&.gb-selector{
 		display: inline-block;position: relative;
-		.input{ position: relative;z-index: 2; }
-		input{ height: @inputHeight; }
+		.input{ position: relative;z-index: 2;cursor: pointer; }
+		input{ height: @inputHeight;outline: none;padding-left: 5px;cursor: pointer; }
 		&>.options{ 
 			background-color: #FFFFFF;width: 100%;overflow: hidden;
-			.absolute(@top: @inputHeight);z-index: 1;
-			.transition(all, 0.3s, ease-in-out);
+			.absolute(@top: @inputHeight);z-index: 1;overflow: auto;
+			.transition(all, 0.25s, ease-in-out);
 			.box-shadow(0 0 5px rgb(180,180,180));
 			height: 0;
 			&.active{
-				bottom: 0;
+				height: @activeOptionsHeight; 
 			}
 		}
 		.options>li{
 			cursor: pointer;
 		}
-		&:hover .options{ 
-			height: @activeOptionsHeight; 
-			li{ position: relative; }
-		}
 	}
+}
+.dropmenu{
+	.dropmenu();
+	.options>li{ height: 30px; }
 }
