@@ -2,7 +2,7 @@
  * 下拉菜单组件
  *
  **/
-!function(){
+window.Dropmenu = function(){
 	var $dropmenu = {
 		parent: null,
 		options: null,
@@ -18,19 +18,23 @@
 		$dropmenu.options.css('height', height);
 		callback && callback.call(this);
 	};
-	$.hide = function(that, callback){
-		that && function(){
-			var $this = $(that);
+	$.fn.hide = function(callback){
+		var $this = $(this);
+		var isSelector = $this.is('.gb-selector');
+		isSelector ? function(){
+			$this.find('.options').css('height', 0);
+		}() : 
+		function(){
 			$dropmenu.parent = $this.closest('.gb-selector');
 			$dropmenu.options = $dropmenu.parent.find('.options');
 			$dropmenu.input = $dropmenu.parent.find('.input>input');
-		}(that);
-		$dropmenu.options.css('height', 0);
-		callback && (that ? callback.call(that) : callback());
+			$dropmenu.options.css('height', 0);
+		}();
+		callback && (isSelector ? callback.call(this) : callback());
 	};
 	$(document)
 	.on('click', function(){
-		$.hide()
+		$('.gb-selector').hide();
 	});
 
 	$(document.body)
@@ -40,8 +44,8 @@
 	})
 	.on('click', '.gb-selector>.options>li', function(){
 		var val = $(this).text();
-		$.hide(this, function(){
+		$(this).hide(function(){
 			$dropmenu.input.val(val);
 		});
 	});
-}();
+};
