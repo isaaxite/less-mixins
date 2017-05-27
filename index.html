@@ -35,16 +35,16 @@
 	<h3>Float Box</h3>
 	<hr>
 	<style type="text/css">
-		.cards{
+		.float-cards{
 			margin-left: -30px;
 		}
-		.card{ margin-left: 30px;border: 1px solid;margin-top: 15px;margin-bottom: 15px; }
+		.float-cards .card{ margin-left: 30px;border: 1px solid;margin-top: 15px;margin-bottom: 15px; }
+		.float-cards .card img{ width: 100%; }
 	</style>
-	<ul class="cards gb-floatBox">
+	<ul class="float-cards gb-floatBox">
 		<li class="item gb-col-6">
 			<ul class="card">
 				<li class="pic">
-					<img src="">
 				</li>
 				<li class="text">
 					安达市多
@@ -54,17 +54,6 @@
 		<li class="item gb-col-6">
 			<ul class="card">
 				<li class="pic">
-					<img src="">
-				</li>
-				<li class="text">
-					安达市多
-				</li>
-			</ul>
-		</li>
-		<li class="item gb-col-6">
-			<ul class="card">
-				<li class="pic">
-					<img src="">
 				</li>
 				<li class="text">
 					安达市多
@@ -73,10 +62,83 @@
 		</li>
 	</ul>
 	<br><br>
+
+	<h3>TABLE Box</h3>
+	<small>不适合使用margin拉伸容器，TABLE Box只有容器左边被拉伸，右边无效。</small>
+	<hr>
+	<style type="text/css">
+		.table-cards{
+		}
+		.table-cards .card{ margin:0 15px;border: 1px solid;margin-top: 15px;margin-bottom: 15px; }
+		.table-cards .card img{ width: 100%; }
+		small{ font-size: 12px;color: gray; }
+	</style>
+	<ul class="table-cards gb-tableBox">
+		<li class="cell gb-col-6">
+			<ul class="card">
+				<li class="pic">
+				</li>
+				<li class="text">
+					安达市多
+				</li>
+			</ul>
+		</li>
+		<li class="cell gb-col-6">
+			<ul class="card">
+				<li class="pic">
+				</li>
+				<li class="text">
+					安达市多
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<br><br>
+
+	<h3>INLINE Box</h3>
+	<hr>
+	<style type="text/css">
+		.inline-cards{
+			margin: 0 -15px;
+		}
+		.inline-cards .card{ margin:0 15px;border: 1px solid;margin-top: 15px;margin-bottom: 15px;font-size: 16px; }
+		.inline-cards .card img{ width: 100%; }
+	</style>
+	<ul class="inline-cards gb-inlineBox">
+		<li class="item gb-col-6">
+			<ul class="card">
+				<li class="pic">
+				</li>
+				<li class="text">
+					安达市多
+				</li>
+			</ul>
+		</li>
+		<li class="item gb-col-6">
+			<ul class="card">
+				<li class="pic">
+				</li>
+				<li class="text">
+					安达市多
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<br><br>
+
 	<h3>三角形/BORDER</h3>
 	<hr>
-	<div class="triangle-1"></div>
-	<div class="triangle-2"></div>
+	<div class="triangle-top-1"></div>
+	<div class="triangle-top-2"></div>
+	&nbsp;
+	<div class="triangle-right-1"></div>
+	<div class="triangle-right-2"></div>
+	&nbsp;
+	<div class="triangle-bottom-1"></div>
+	<div class="triangle-bottom-2"></div>
+	&nbsp;
+	<div class="triangle-left-1"></div>
+	<div class="triangle-left-2"></div>
 <script type="text/javascript" src="./tool/components.js"></script>
 </body>
 </html>
