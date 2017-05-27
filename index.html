@@ -75,19 +75,22 @@
 			</div>
 		</div>
 		<br><br>
-		<div class="a-menu gb-hoverMenu">
-			<a href="">Menu Item</a>
+		<h3>悬停菜单组件</h3>
+		<hr>
+		<div v-for="(item, index) in hoverMenus" class="a-menu gb-hoverMenu">
+			<a href="">menu item{{ index }}</a>
 			<dl class="options">
-				<i><!-- 气泡triangle --></i>
-				<ul class="body radius">
-					<li class="title">title</li>
-					<template v-for="i in 5">
-						<li>item{{ i }}</li>
+				<i v-if="item.triange"><!-- 气泡triangle --></i>
+				<dd class="body" :class="{radius: item.radius, shadow: item.shadow}">
+					<label class="title">title</label>
+					<template v-for="i in 4">
+						<a href="">item{{ i }}</li>
 					</template>
-				</ul>
+				</dd>
 			</dl>
 		</div>
-	</div>						
+	</div>	
+<br><br><br><br><br><br><br>												
 <script type="text/javascript">
 	Dropmenu();
 	var app = new Vue({
@@ -96,6 +99,16 @@
 			triangles: [
 				['top-1', 'top-2'], ['right-1', 'right-2'],
 				['bottom-1', 'bottom-2'], ['left-1', 'left-2'],
+			],
+			hoverMenus: [
+				{ shadow: true, triange: true, radius: true,  },
+				{ shadow: true, triange: true, radius: false,  },
+				{ shadow: true, triange: false, radius: true,  },
+				{ shadow: true, triange: false, radius: false,  },
+				{ shadow: false, triange: true, radius: true,  },
+				{ shadow: false, triange: true, radius: false,  },
+				{ shadow: false, triange: false, radius: true,  },
+				{ shadow: false, triange: false, radius: false,  }
 			]
 		}
 	})

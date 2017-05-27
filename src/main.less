@@ -2,11 +2,7 @@
 body{
 	padding: 30px 50px;
 }
-.dropmenu{
-	width: 300px;margin: 0 15px;
-	input{ height: 40px; }
-	.options>li{ line-height: 30px; }
-}
+.container{ height: 100%;padding-bottom: 200px; }
 .float-cards{
 	margin-left: -30px;
 	.card{ margin-left: 30px;border: 1px solid;margin-top: 15px;margin-bottom: 15px; }
@@ -51,5 +47,14 @@ body{
 }
 
 .a-menu{
-	.options{ width: 200%;.relative(@left: -50%); }
+	margin: 0 15px;
+	.options{ 
+		width: 200%;.relative(@left: -50%); 
+		label,a{ line-height: 30px;padding: 0 10px; }
+	}
+}
+.dropmenu{
+	width: 300px;margin: 0 15px;
+	input{ height: 40px; }
+	.options>li{ line-height: 30px;padding: 0 10px; }
 }
