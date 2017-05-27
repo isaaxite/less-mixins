@@ -19,23 +19,6 @@
 		<button class="gb-btn primary block">submit</button>
 		<br><br>
 
-		<div id="dropmenu">
-		<h3>下拉菜单组件</h3>
-		<hr>
-		<div v-for="i in 4" :id="'select-'+i" class="dropmenu gb-selector">
-			<dl class="input"><input type="text" disabled value="这是一段非常非常非常非常非常非常非常非常非常长的item" placeholder="自定义的selector"><i></i></dl>
-			<ul class="options">
-				<li title="这是一段非常非常非常非常非常非常非常非常非常长的item">这是一段非常非常非常非常非常非常非常非常非常长的item</li>
-				<li>2</li>
-				<li>3</li>
-			</ul>
-		</div>
-		<script type="text/javascript">
-			Dropmenu();
-		</script>
-		</div>
-		<br>
-		<br>
 		<h3>Float Box</h3>
 		<hr>
 		<ul class="float-cards gb-floatBox">
@@ -77,8 +60,35 @@
 		<div :class="'triangle-'+item[1]"></div>
 		&nbsp;
 		</template>
-	</div>
+		<br><br>
+		<div id="dropmenu">
+			<h3>下拉菜单组件</h3>
+			<hr>
+			<div v-for="i in 4" :id="'select-'+i" class="dropmenu gb-selector">
+				<dl class="input"><input type="text" disabled value="这是一段非常非常非常非常非常非常非常非常非常长的item" placeholder="自定义的selector"><i></i></dl>
+				<ul class="options">
+					<li title="这是一段非常非常非常非常非常非常非常非常非常长的item">这是一段非常非常非常非常非常非常非常非常非常长的item</li>
+					<li>2</li>
+					<li>3</li>
+				</ul>
+			</div>
+		</div>
+		<br><br>
+		<div class="a-menu gb-hoverMenu">
+			<a href="">Menu Item</a>
+			<dl class="options">
+				<i><!-- 气泡triangle --></i>
+				<ul class="body radius">
+					<li class="title">title</li>
+					<template v-for="i in 5">
+						<li>item{{ i }}</li>
+					</template>
+				</ul>
+			</dl>
+		</div>
+	</div>						
 <script type="text/javascript">
+	Dropmenu();
 	var app = new Vue({
 		el: '#app',
 		data: {
