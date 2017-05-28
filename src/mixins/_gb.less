@@ -167,6 +167,7 @@
 }
 .mixin-col(@n: 12, @i: 1) when (@i =< @n ){
 	.gb-col-@{i}{ width: percentage(@i/@n); }
+	.gb-flexCol-@{i}{ flex-basis: percentage(@i/@n); }
 	.mixin-col(@n, (@i + 1));
 }
 
