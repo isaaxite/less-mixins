@@ -89,10 +89,20 @@
 				</dd>
 			</dl>
 		</div>
-	</div>	
-	<!-- <div class="gb-mash"><div class="gb-loading"></div></div> -->
-	<!-- <div class="gb-mash"><div class="gb-loadingSpinner"><i></i></div></div> -->
-<br><br><br><br><br><br><br>												
+		<br><br>
+		<br><br>
+		<h3>Loading Animate</h3>
+		<hr>
+		<button id="btn-loading-1">loading-1</button>
+		<button id="btn-loading-2">loading-2</button>
+
+		<div id="loading-1" class="gb-mash gb-hide"><div class="gb-loading"></div></div>
+
+		<div id="loading-2" class="gb-mash gb-hide"><div class="gb-loadingSpinner"><i></i></div></div>
+
+
+		<br><br><br><br><br><br><br><br><br><br><br><br>
+	</div>												
 <script type="text/javascript">
 	Dropmenu();
 	var app = new Vue({
@@ -113,7 +123,17 @@
 				{ shadow: false, triange: false, radius: false,  }
 			]
 		}
+	});
+	$(document)
+	.on('click', '#btn-loading-1', function(){
+		$("#loading-1").removeClass('gb-hide');
 	})
+	.on('click', '#btn-loading-2', function(){
+		$("#loading-2").removeClass('gb-hide');
+	})
+	.on('click', '.gb-mash', function(){
+		$(".gb-mash").addClass('gb-hide');
+	});
 </script>
 </body>
 </html>
