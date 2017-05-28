@@ -172,6 +172,7 @@
 	}
 	.mixin-col(@n, (@i + 1));
 }
+
 .placeholder(@color: #999){
 	&::-webkit-input-placeholder {
 		color: @color;
@@ -198,6 +199,16 @@
 	font-weight: @weight;
 	font-style: @style;
 }
+
+
+.keyframes(@name, @frames){
+	@-webkit-keyframes @name { @frames(); }
+	@-moz-keyframes @name { @frames(); }
+	@-ms-keyframes @name { @frames(); }
+	@-o-keyframes @name { @frames(); }
+	@keyframes @name { @frames(); }
+}
+
 .user-select(@mode: none){
 	-webkit-user-select: @mode;
 	-ms-user-select: @mode;

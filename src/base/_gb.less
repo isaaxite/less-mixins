@@ -1,5 +1,6 @@
 *{ .box-sizing(border-box); }
 html,body{ height: 100% }
+a{ text-decoration: none;color: currentColor; }
 .gb-ellipsis{
 	text-overflow: ellipsis;
 	overflow-x: hidden;
@@ -102,32 +103,28 @@ html,body{ height: 100% }
     &:hover{ background-color: #c9302c;border-color: #761c19; }
 	}
 }
-// loading
-@-webkit-keyframes bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0) }
-  40% { -webkit-transform: scale(1.0) }
-}
 
-@keyframes bouncedelay {
-  0%, 80%, 100% { 
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  } 40% { 
-    -webkit-transform: scale(1.0);
-    transform: scale(1.0);
-  }
-}
+
 .gb-mash{ .fixed(0,0,0,0);background-color: rgba(0,0,0,0.2);z-index: 9; }
 .gb-loadingSpinner{
   &{ display: block;text-align: center;.fixed(50%, 50%);z-index: 10; }
   .temp(){ width: 18px;height: 18px;background-color: #333;border-radius: 100%;display: inline-block;
-	  .animation(bouncedelay, 1.4s, @count: infinite, @dir: both); }
+	  .animation(bounce, 1.4s, @count: infinite, @dir: both); }
   
   &>i,&::after, &::before{ .temp();content: ""; }
   &>i{ .animation-delay(-0.16s); }
   &::before{ .relative(@right: 10px);.animation-delay(-0.32s); }
   &::after{ .relative(@left: 10px); }
 }
+
+.function-name(@function-param){
+  @function-param();
+}
+.function-name({
+	from{z-index :100;}
+  to{z-index: -100}
+});
+
 
 
 
