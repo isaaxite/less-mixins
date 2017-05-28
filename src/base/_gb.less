@@ -1,6 +1,3 @@
-*{ .box-sizing(border-box); }
-html,body{ height: 100% }
-a{ text-decoration: none;color: currentColor; }
 .gb-ellipsis{
 	text-overflow: ellipsis;
 	overflow-x: hidden;
@@ -109,21 +106,13 @@ a{ text-decoration: none;color: currentColor; }
 .gb-loadingSpinner{
   &{ display: block;text-align: center;.fixed(50%, 50%);z-index: 10; }
   .temp(){ width: 18px;height: 18px;background-color: #333;border-radius: 100%;display: inline-block;
-	  .animation(bounce, 1.4s, @count: infinite, @dir: both); }
+	  .animation(bouncedelay, 1.4s, @count: infinite, @dir: both); }
   
   &>i,&::after, &::before{ .temp();content: ""; }
   &>i{ .animation-delay(-0.16s); }
   &::before{ .relative(@right: 10px);.animation-delay(-0.32s); }
   &::after{ .relative(@left: 10px); }
 }
-
-.function-name(@function-param){
-  @function-param();
-}
-.function-name({
-	from{z-index :100;}
-  to{z-index: -100}
-});
 
 
 
