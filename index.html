@@ -127,9 +127,18 @@
 
 		<div id="loading-2" class="gb-mash gb-hide"><div class="gb-loadingBounce"><i></i></div></div>
 
-
+		<br><br>
+		<br><br>
+		<h3>Router</h3>
+		<hr>
+		<a href="#">#</a>
+		<a href="#one">#one</a>
+		<a href="#two">#two</a>
+		<a href="#three">#three</a>
+		<button class="asd">asd</button>
 		<br><br><br><br><br><br><br><br><br><br><br><br>
-	</div>												
+	</div>
+											
 <script type="text/javascript">
 	Dropmenu();
 	var app = new Vue({
@@ -162,5 +171,22 @@
 		$(".gb-mash").addClass('gb-hide');
 	});
 </script>
+<script type="text/javascript">
+
+	Router({
+		'#': function(params) {
+			console.log(params);
+		},
+		'#one': function(params) {
+			console.log(params);
+		},
+		'#two': function(params) {
+			console.log(params);
+		},
+		'#three': function(params) {
+			console.log(params);
+		}
+	});
+</script>		
 </body>
 </html>
