@@ -59,7 +59,7 @@ window.Dropmenu = function(){
 function Router(options) {
 	var params = function(){
 		if(location.href.indexOf('#') < 0){ 
-			return { hash: '#', url_params: {}, hash_params: {} }; 
+			return { hash: '#', urlParams: {}, hashParams: {} }; 
 		}
 		var temp = location.href.split('#');
 		var url = temp[0], hash = '#'+temp[1];
@@ -86,7 +86,7 @@ function Router(options) {
 				hashParams[temp[0]] = decodeURIComponent(temp[1]);
 			}
 		}
-		return { hash: hash, url_params: urlParams, hash_params: hashParams }
+		return { hash: hash, urlParams: urlParams, hashParams: hashParams }
 	};
 
 	var routes = function() {
@@ -97,3 +97,107 @@ function Router(options) {
 	window.addEventListener('hashchange', routes);
 }
 
+/**
+ * Form表单检测组件
+ *
+ **/
+!function(){
+
+	window.FromChecker = function(options) {
+
+		var DEFAULT = {
+			el: 'form',
+			noCheckNames: [],
+			toast: function(tip) { alert(tip); },
+			tipAttrName: 'data-tip' 
+		};
+
+		if(typeof options != 'object'){ console.error('Please Init With Object');return ; }
+		this.formData = null;
+		this.options = $.extend({}, DEFAULT, options);
+		this.tip = "请输入完成信息!";
+
+	};
+
+	FromChecker.prototype.RegExps = {
+		username: /^[a-z0-9_-]{3,16}$/,
+		pwd: /^[a-z0-9_-]{6,18}$/,
+		url: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/,
+		number: /\d/,
+		email: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+	};
+
+	FromChecker.prototype.isInArray = function(item, array) {
+		var arrStr = array.join(',');
+		item = item + '';
+		return arrStr.indexOf(item) > -1 ? true : false;
+	};
+
+	FromChecker.prototype.getTip = function(itemName) {
+		var options = this.options;
+		var $item = $('[name='+ itemName +']');
+		var tip = $item.attr(options.tipAttrName) || $item.parent().attr(options.tipAttrName) || this.tip;
+		return tip;
+	};
+
+	FromChecker.prototype.check = function(callback) {
+		var options = this.options;
+		this.formData = $(options.el).serializeArray();
+		var $item, that = this;
+		var res = { status: true };
+
+		$.each(this.formData, function checkEachItem(i, v) {
+			var isCheck = !that.isInArray(v.name, options.noCheckNames);
+			if( isCheck ) {
+				if( v.value.trim() === '' ) { 
+					var tip = that.getTip(v.name);
+					options.toast(tip);
+					res = { status: false, name: v.name };
+					return false;
+				}
+			}
+		});
+		if(callback){
+			if(!callback()){ res.status = false; }
+		}
+		return res;
+	};
+
+	FromChecker.prototype.ajaxSubmit = function(sender) {
+		var that = this;
+		var options = that.options;
+		var DEFAULT = {
+			url: $(options.el).prop('action'),
+			method: 'post',
+			dataType: 'json',
+			data: that.formData
+		};
+		sender = $.extend({}, DEFAULT, sender)
+		if(!sender.url) { 
+			console.error('Error: Action can not be empty!'); 
+			return ;
+		}
+
+		$.ajax({
+			url: sender.url,
+			method: sender.method,
+			data: sender.data,
+			dataType: sender.dataType,
+			cache: false,
+			async: true,
+			success: function(resp){
+				var obj = $(options.el)[0];
+				sender.success && sender.success.call(obj, resp);
+			},
+			error: function(resp){
+				console.error('Error: Can not to Connect: ', sender.url);
+				console.error(resp);
+			}
+		});
+	};
+
+	FromChecker.prototype.test = function() {
+
+	}
+
+}();
