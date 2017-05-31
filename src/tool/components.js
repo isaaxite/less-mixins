@@ -196,8 +196,70 @@ function Router(options) {
 		});
 	};
 
-	FromChecker.prototype.test = function() {
+}();
++function fnExtend(){
+	$.fn.radio = function(sender) {
+		var DEFAULT = {
+			itemEle: '.item',
+			activeClass: 'active'
+		};
+		if($.isFunction(sender)) {
+			sender = { callback: sender };
+		}else if($.isPlainObject(sender)){
+			console.error("Error: Please init with object or function");
+			return false;
+		}else{
+			console.error('Error: unknown');
+			return false;
+		}
 
+	  sender = $.extend({}, DEFAULT, sender);
+
+	  $(document).on('click', $(this).selector, function(){
+	    var $this = $(this);
+	    var $parent = sender.parent 
+	        ? $this.closest(sender.parent) 
+	        : $this.closest(sender.itemEle).parent();
+	    var $activeEle = $this.closest(sender.itemEle) || $this;
+
+	    $parent.find(sender.itemEle).removeClass(sender.activeClass);
+	    $activeEle.addClass(sender.activeClass);
+	    sender.callback && sender.callback.apply(this);
+	  });
+	  return $(this);
+	};
+
+	$.fn.checkbox = function(options) {
+		var DEFAULT = {
+			itemEle: '.item',
+			activeClass: 'active',
+		};
+
+		if($.isFunction(options)) {
+			options = { callback: sender };
+		}else if($.isPlainObject(options)){
+			console.error("Error: Please init with object or function");
+			return false;
+		}else{
+
+		}
+
+		options = $.extend({}, DEFAULT, options);
+
+		$(document).on('click', $(this).selector, function(){
+      var $this = $(this);
+	    var $parent = options.parent 
+	        ? $this.closest(options.parent) 
+	        : $this.closest(options.itemEle).parent();
+	    var $activeEle = $this.closest(options.itemEle) || $this;
+
+      var isActive = $activeEle.hasClass(options.activeClass);
+
+      isActive 
+      ? $activeEle.removeClass(options.activeClass) 
+      : $activeEle.addClass(options.activeClass);
+      
+      options.callback && options.callback.call(this, isActive);
+    });
 	}
-
 }();
